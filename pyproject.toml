@@ -29,7 +29,7 @@ select = ["I", "F", "E", "W", "PL", "PT"]
 
 [tool.ruff.format]
 preview = true
-quote-style = "single"
+quote-style = "double"
 
 [tool.taskipy.tasks]
 run = "fastapi dev fast_zero/app.py"
