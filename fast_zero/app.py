@@ -1,6 +1,6 @@
 from http import HTTPStatus
 
-from fastapi import FastAPI
+from fastapi import FastAPI, HTTPException
 from fastapi.responses import HTMLResponse
 
 from fast_zero.schemas import Message, UserDB, UserList, UserPublic, UserSchema
@@ -29,6 +29,8 @@ def read_users():
 
 @app.put("/users/{id}/", response_model=UserPublic)
 def update_users(pk: int, user: UserSchema):
+    if pk < 1 or pk > len(database):
+        raise HTTPException(status_code=HTTPStatus.NOT_FOUND, detail="User not found")
     user_with_id = UserDB(id=pk, **user.model_dump())
     database[pk - 1] = user_with_id
     return user_with_id
