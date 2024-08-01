@@ -35,6 +35,24 @@ def test_read_users(client):
     }
 
 
+def test_update_user(client):
+    response = client.put(
+        "/users/{id}/?pk=1",
+        json={
+            "username": "testusername2",
+            "email": "test@gmail.com",
+            "password": "test",
+        },
+    )
+
+    assert response.status_code == HTTPStatus.OK
+    assert response.json() == {
+        "id": 1,
+        "username": "testusername2",
+        "email": "test@gmail.com",
+    }
+
+
 def test_hello_world_html(client, html_response):
     response = client.get("/HelloWorldHtml/")
     assert response.status_code == HTTPStatus.OK
