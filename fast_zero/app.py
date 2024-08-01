@@ -1,6 +1,7 @@
 from http import HTTPStatus
 
 from fastapi import FastAPI
+from fastapi.responses import HTMLResponse
 
 from fast_zero.schemas import Message, UserDB, UserList, UserPublic, UserSchema
 
@@ -31,3 +32,17 @@ def update_users(pk: int, user: UserSchema):
     user_with_id = UserDB(id=pk, **user.model_dump())
     database[pk - 1] = user_with_id
     return user_with_id
+
+
+@app.get("/HelloWorldHtml/", response_class=HTMLResponse)
+def hello_world_html():
+    return """
+    <html>
+        <head>
+            <title>Hello World</title>
+        </head>
+        <body>
+            <h1>Hello World</h1>
+        </body>
+    </html>
+    """

@@ -33,3 +33,9 @@ def test_read_users(client):
     assert response.json() == {
         "user": [{"id": 1, "username": "testusername", "email": "test@gmail.com"}]
     }
+
+
+def test_hello_world_html(client, html_response):
+    response = client.get("/HelloWorldHtml/")
+    assert response.status_code == HTTPStatus.OK
+    assert response.text == html_response
