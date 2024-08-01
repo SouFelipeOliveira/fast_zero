@@ -36,6 +36,15 @@ def update_users(pk: int, user: UserSchema):
     return user_with_id
 
 
+@app.delete("/users/{id}/", response_model=Message)
+def delete_user(pk: int):
+    if pk < 1 or pk > len(database):
+        raise HTTPException(status_code=HTTPStatus.NOT_FOUND, detail="User not found")
+
+    del database[pk - 1]
+    return {"message": "user deleted"}
+
+
 @app.get("/HelloWorldHtml/", response_class=HTMLResponse)
 def hello_world_html():
     return """
