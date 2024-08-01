@@ -35,7 +35,7 @@ def test_read_users(client):
     }
 
 
-def test_update_user(client):
+def test_update_user_success(client):
     response = client.put(
         "/users/{id}/?pk=1",
         json={
