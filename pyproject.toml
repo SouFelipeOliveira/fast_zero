@@ -19,7 +19,7 @@ taskipy = "^1.13.0"
 pythonpath = "."
 addopts = "-p no:warnings"
 
-[tools.ruff]
+[tool.ruff]
 line-length = 79
 extend-exclude = ["migrations"]
 
